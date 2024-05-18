@@ -5167,7 +5167,11 @@ pre[class*=language-]{
 }
 .lazyload{
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-    opacity:0
+    opacity:0;
+	width: 280px;
+  height: 280px;
+	background-size: contain; 
+
 }
 .initial.loaded,.lazyload.loaded{
     -webkit-transition:opacity 1.6s ease,-webkit-transform .4s ease;
