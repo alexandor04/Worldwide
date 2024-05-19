@@ -83,11 +83,11 @@ a {
 .site-footer {
   background-color: #333;
   color: white;
-  padding: 20px 0;
+  padding: 15px 0;
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 90%;
 }
 
 .container {
@@ -99,6 +99,6 @@ a {
 
 .footer-about, .footer-links, .footer-contact {
   flex: 1;
-  min-width: 200px;
-  margin-bottom: 20px;
+  min-width: 190px;
+  margin-bottom: 15px;
 }
