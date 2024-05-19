@@ -1,14 +1,7 @@
 function paraph(){
-    var button = document.getElementById("btn");
-    var buttonName = button.textContent;
-    if (buttonName == "Développer"){
-    document.getElementById("blocp").textContent=" Larry Page est né dans une famille juive à East Lansing, au Michigan, aux États-Unis,le 26 mars 1973. Il est le fils de deux professeurs d’université : Gloria Weinstein (1944-), professeure de programmation à l’Université du Michigan, et Carl V. Page (1938-1996), professeur d’informatique et d’intelligence artificielle à l’Université de Caroline du Nord à Chapel Hill et à l’Université du Michigan. Carl Page est notamment un pionnier et une référence dans le domaine de l’intelligence artificielle.";
-    document.getElementById("btn").textContent="Réduire";
-    }
-    else if (buttonName == "Réduire"){
-        document.getElementById("blocp").textContent=" ";
-        document.getElementById("btn").textContent="Développer";
-    }
+    document.getElementById("btn").addEventListener("click", function(){
+    window.open("avion_de_chasse.html", "_blank");
+    })
 }
 
 function paraph2(){
