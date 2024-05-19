@@ -84,6 +84,10 @@ a {
   background-color: #333;
   color: white;
   padding: 20px 0;
+  position: relative;
+  clear:both;
+  margin-top: -150px;
+  height: 150px
 }
 
 .container {
