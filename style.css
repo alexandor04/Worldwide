@@ -3517,6 +3517,11 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     transition:box-shadow .4s ease;
     transition:box-shadow .4s ease,-webkit-box-shadow .4s ease;
     border:solid #f6f6f6;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
+    padding: 10px;
+    margin: 10px;
+    background-color: green;
     border-width:10px 10px 0
 }
 .card:last-of-type{
@@ -5569,10 +5574,4 @@ color: #000000;
 #nomdusite{
     text-align: center;
     color : Blue;
-}
-.sectionv {
-  border-radius: 8px;
-  padding: 20px;
-  margin: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
 }
