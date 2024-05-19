@@ -44,13 +44,6 @@ a {
 .iml {
   margin : 10px;
 }
-
-.Quiz { 
-  margin : 6px;
-  border-radius: 800px;
-  padding: 1.5px;
-  text-align: center;
-}
 .btnl {
   margin : 5px;
 }
@@ -82,7 +75,9 @@ a {
 #logo {
   border-radius: 150px;
   width: 200px;
-  height: 200px
+  height: 200px;
+  display: block;
+
 }
 .site-footer {
   background-color: #333;
