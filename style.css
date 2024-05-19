@@ -3510,6 +3510,9 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     margin-bottom:0
 }
 .card{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Crée 3 colonnes qui s'adaptent à la largeur de l'écran */
+    gap: 20px;
     position:relative;
     overflow:hidden;
     width:100%;
