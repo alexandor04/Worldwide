@@ -79,8 +79,10 @@ a {
 #par2 {
   margin-bottom: 5px;
 }
-#LP {
+#logo {
   border-radius: 150px;
+  width: 200px;
+  height: 200px
 }
 .site-footer {
   background-color: #333;
