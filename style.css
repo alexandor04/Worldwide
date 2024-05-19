@@ -3519,8 +3519,6 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     border:solid #f6f6f6;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
-    padding: 10px;
-    margin: 10px;
     background-color: green;
     border-width:10px 10px 0
 }
