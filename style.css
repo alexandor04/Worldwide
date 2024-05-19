@@ -5576,7 +5576,7 @@ color: #000000;
     color : Blue;
 }
 .sectionv {
-  background-color : rgba(255, 255, 255, 0.863);
+  background-color : rgba(255, 255, 255);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
   
