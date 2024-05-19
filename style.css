@@ -1,1 +1,83 @@
 
+h1 {
+  margin-bottom: 20px;
+  font-size: 70px;
+  text-transform: capitalize;
+    text-shadow:
+    -5px -5px 5px #aaa,
+    0px 10px 5px rgba(0, 0, 0, 0.5),
+    10px 10px 10px rgba(0, 0, 0, 0.7),
+    0px 0px 10px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+a {
+  font-size: 35px;
+  outline: none;
+  text-decoration-color: #007bff2a;
+  color: #007bff;
+  padding: 2px 1px 0;
+}
+body {
+  background:  url('R.jpg');       
+  background-size: contain; 
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.img {
+  display: block;
+  margin: auto;
+  margin-top: 0px;
+  width: 280px;
+  height: 280px;
+}
+.tipar{
+  font-size: 35px;
+  outline: none;
+  text-decoration: none;
+  color: #007bff;
+  padding: 2px 1px 0;
+}
+.prct {
+  padding : 3px;
+  margin: 20px;
+  margin-top: 0px ;
+  border-radius: 4px;
+  width: 230px;
+  color : rgb(201, 13, 13);
+  border-color : green;
+}
+.iml {
+  margin : 10px;
+}
+
+.Quiz { 
+  margin : 6px;
+  border-radius: 800px;
+  padding: 1.5px;
+  text-align: center;
+}
+.btnl {
+  margin : 5px;
+}
+.center{
+  text-align: right;
+}  
+.ref :hover{
+  background-color: rgb(8, 0, 0);
+}
+.sectionv {
+  background-color : rgba(255, 255, 255, 0.863);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
+}
+
+#par2 {
+  margin-bottom: 5px;
+}
+#LP {
+  border-radius: 150px;
+}
+
