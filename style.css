@@ -3511,15 +3511,9 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     overflow:hidden;
     width:100%;
     max-height:600px;
-    -webkit-transition:-webkit-box-shadow .4s ease;
-    transition:-webkit-box-shadow .4s ease;
-    -o-transition:box-shadow .4s ease;
-    transition:box-shadow .4s ease;
-    transition:box-shadow .4s ease,-webkit-box-shadow .4s ease;
-    border:solid #f6f6f6;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
-    background-color: green;
+    background-color: Red;
     border-width:10px 10px 0
 }
 .card:last-of-type{
