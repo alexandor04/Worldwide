@@ -662,7 +662,8 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     max-width:1400px;
     margin:0 auto
 }
-.container{
+.container{ 
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Crée 3 colonnes qui s'adaptent à la largeur de l'écran */
     margin-right:10px;
     margin-left:10px;
     display: grid;
@@ -3519,7 +3520,7 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     max-height:600px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
-    background-color: Blue;
+    background-color: Green;
     border-width:10px 10px 0
 }
 .card:last-of-type{
