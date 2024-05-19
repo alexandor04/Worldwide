@@ -669,6 +669,9 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     gap: 20px;
 }
 .grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Crée 3 colonnes qui s'adaptent à la largeur de l'écran */
+    gap: 20px;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
     display:-webkit-box;
