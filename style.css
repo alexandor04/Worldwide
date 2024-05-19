@@ -16,13 +16,6 @@ a {
   color: #007bff;
   padding: 2px 1px 0;
 }
-body {
-  background:  url('R.jpg');       
-  background-size: contain; 
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
 .img {
   display: block;
   margin: auto;
