@@ -3519,7 +3519,7 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     max-height:600px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
-    background-color: Red;
+    background-color: Blue;
     border-width:10px 10px 0
 }
 .card:last-of-type{
