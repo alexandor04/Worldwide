@@ -80,3 +80,45 @@ a {
 #LP {
   border-radius: 150px;
 }
+.site-footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.footer-about, .footer-links, .footer-contact {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li {
+  margin-bottom: 5px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-contact p {
+  margin: 0;
+}
+
+.footer-contact a {
+  color: white;
+  text-decoration: underline;
+}
