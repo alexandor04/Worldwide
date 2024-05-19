@@ -663,10 +663,10 @@ abbr,acronym,blockquote,code,input,kbd,q,samp,var{
     margin:0 auto
 }
 .container{
-    margin-right:1px;
-    margin-left:1px;
-    padding-right:1rem;
-    padding-left:1rem
+    margin-right:10px;
+    margin-left:10px;
+    display: grid;
+    gap: 20px;
 }
 .grid{
     -webkit-box-sizing:border-box;
