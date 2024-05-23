@@ -1,5 +1,5 @@
 function paraph(){
-    window.open("gpsavion.html", "_blank");
+    window.open("gpsavion.html");
 }
 
 function paraph2(){
