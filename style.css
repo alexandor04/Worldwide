@@ -65,7 +65,7 @@ a {
 .ligne {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Crée 3 colonnes qui s'adaptent à la largeur de l'écran */
-  gap: 15px;
+  gap: 10px ;
   align-content: start; /* Ajout de cette propriété pour aligner les éléments en haut */
  /* Pour prendre en compte la hauteur totale de la page */
 }
