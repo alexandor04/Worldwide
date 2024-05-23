@@ -1,6 +1,6 @@
 function paraph(){
     document.getElementById("btn").addEventListener("click", function(){
-    window.open("avion_de_chasse.html", "_blank");
+    window.open("gpsavion.html", "_blank");
     })
 }
 
