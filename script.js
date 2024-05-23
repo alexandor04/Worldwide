@@ -3,9 +3,7 @@ function paraph(){
 }
 
 function paraph2(){
-    document.getElementById("btn2").addEventListener("click", function(){
-        window.open("", "_blank");
-        })
+    window.open("Maintenancepre.html", "_self");
 }
 
 function opacity() {
