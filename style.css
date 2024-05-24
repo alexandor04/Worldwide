@@ -1,3 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+header {
+    background-color: #333;
+    color: #dff;
+    padding: 20px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
 
 h1 {
   margin-top: -7px;
@@ -11,8 +55,13 @@ h1 {
     0px 0px 10px rgba(0, 0, 0, 0.4);
   text-align: center;
 }
-
-
+h2 {
+    text-align: center;
+    color: #333;
+}
+h3 {
+    color: #007bff; /* Bleu */
+}
 h4 {
   margin-left: 5px;
 }
@@ -76,16 +125,6 @@ a {
  /* Pour prendre en compte la hauteur totale de la page */
 }
 
-#par2 {
-  margin-bottom: 5px;
-}
-#logo {
-  border-radius: 150px;
-  width: 200px;
-  height: 200px;
-  display: block;
-
-}
 .site-footer {
   background-color: #333;
   color: white;
@@ -109,14 +148,6 @@ a {
   margin-bottom: 15px;
 }
 
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 20px;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
 .container2 {
     max-width: 800px;
     margin: 0 auto;
@@ -126,50 +157,15 @@ body {
   	border-radius : 5px;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
-}
 
-h3 {
-    color: #007bff; /* Bleu */
-}
 
-p {
-    margin-bottom: 15px;
+#par2 {
+  margin-bottom: 5px;
 }
+#logo {
+  border-radius: 150px;
+  width: 200px;
+  height: 200px;
+  display: block;
 
-ul {
-    list-style: disc;
-    padding-left: 20px;
-}
-
-header {
-    background-color: #333;
-    color: #dff;
-    padding: 20px;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    border-radius: 5px,
-}
-
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    border-radius: 5px;
-}
-
-nav li {
-    margin-right: 20px;
-    border-radius: 5px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
 }
