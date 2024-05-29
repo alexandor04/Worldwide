@@ -5,6 +5,9 @@ function paraph(){
 function paraph2(){
     window.open("Maintenancepre.html", "_self");
 }
+function paraph3(){
+    window.open("Simulavion.html", "_self");
+}
 
 function opacity() {
     var pourcent = (parseFloat(document.getElementById('1').value)/100);
