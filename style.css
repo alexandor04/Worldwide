@@ -100,8 +100,10 @@ a {
 .iml {
   margin : 10px;
 }
-.btnl {
-  margin : 5px;
+.btn {
+  border-radius : 9px;
+  display : flex;
+  margin : auto;
 }
 .center{
   text-align: right;
