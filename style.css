@@ -6,7 +6,7 @@
     --text-color: #212529;
     --primary-color: #0077b6;
     --card-bg: #ffffff;
-    --card-pinned-bg: #e0f7fa;
+    --card-pinned-bg: #d0ebff;
     --shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
 }
 
@@ -213,7 +213,7 @@ header p {
 }
 
 .quote-card.pinned {
-    background-color: var(--card-pinned-bg);
+    border-left: 5px solid green;
 }
 
 .quote-card .quote-content {
@@ -277,7 +277,13 @@ header p {
     transition: background 0.2s;
 }
 
-.pin-button:hover {
+.pin-button.pinned {
+    background-color: #ced4da;
+    color: #495057;
+    cursor: default;
+}
+
+.pin-button:hover:not(.pinned) {
     background: #ffe8a1;
 }
 
