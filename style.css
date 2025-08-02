@@ -1,174 +1,292 @@
+/* --- Configuration Générale & Polices --- */
+:root {
+    --primary-font: 'Roboto', sans-serif;
+    --title-font: 'Playfair Display', serif;
+    --background-color: #f8f9fa;
+    --text-color: #212529;
+    --primary-color: #0077b6;
+    --card-bg: #ffffff;
+    --card-pinned-bg: #e0f7fa;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    margin: 20px;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-p {
-    margin-bottom: 15px;
-}
-
-ul {
-    list-style: disc;
-    padding-left: 20px;
-}
-
-header {
-    background-color: #333;
-    color: #dff;
-    padding: 20px;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
-    border-radius: 5px;
-}
-
-nav ul {
-    list-style: none;
+    font-family: var(--primary-font);
+    background-color: var(--background-color);
+    color: var(--text-color);
     margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
+    padding: 2rem;
 }
 
-nav li {
-    margin-right: 20px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-}
-
-
-h1 {
-  margin-top: -7px;
-  margin-bottom: 10px;
-  font-size: 70px;
-  text-transform: capitalize;
-    text-shadow:
-    -5px -5px 5px #aaa,
-    0px 10px 5px rgba(0, 0, 0, 0.5),
-    10px 10px 10px rgba(0, 0, 0, 0.7),
-    0px 0px 10px rgba(0, 0, 0, 0.4);
-  text-align: center;
-}
-h2 {
-    text-align: center;
-    color: #333;
-}
-h3 {
-    color: #007bff; /* Bleu */
-}
-h4 {
-  margin-left: 10px;
-}
-
-a {
-  font-size: 35px;
-  outline: none;
-  text-decoration-color: #007bff2a;
-  color: #007bff;
-  padding: 2px 1px 0;
-}
-
-.img {
-  display: block;
-  margin: auto;
-  margin-top: 0px;
-  width: 280px;
-  height: 280px;
-}
-.tipar{
-  font-size: 35px;
-  outline: none;
-  text-decoration: none;
-  color: #007bff;
-  padding: 2px 1px 0;
-}
-.prct {
-  padding : 3px;
-  margin: 20px;
-  margin-top: 0px ;
-  border-radius: 4px;
-  width: 230px;
-  color : rgb(201, 13, 13);
-  border-color : green;
-}
-.iml {
-  margin : 10px;
-}
-.btn {
-  border-radius : 9px;
-  display : flex;
-  margin : auto;
-}
-.center{
-  text-align: right;
-}  
-.ref :hover{
-  background-color: rgb(8, 0, 0);
-}
-.sectionv {
-  background-color : rgba(255, 255, 255, 0.863);
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.600);
-  
-}
-.ligne {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr)); /* Crée 3 colonnes qui s'adaptent à la largeur de l'écran */
-  gap: 10px ;
-  align-content: start; /* Ajout de cette propriété pour aligner les éléments en haut */
- /* Pour prendre en compte la hauteur totale de la page */
-}
-
-.site-footer {
-  background-color: #333;
-  color: white;
-  padding: 15px 0;
-  bottom: 2px;
-  left: 0;
-  width: 100%;
-  height: 10%;
-  border-radius : 7px;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 15px;
-}
-
-.footer-about, .footer-links, .footer-contact {
-  flex: 1;
-  min-width: 190px;
-  margin-bottom: 15px;
-}
-
-.container2 {
-    max-width: 800px;
+.page-container {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  	border-radius : 5px;
 }
 
-
-
-#par2 {
-  margin-bottom: 5px;
+/* --- En-tête --- */
+header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
-#logo {
-  border-radius: 150px;
-  width: 200px;
-  height: 200px;
-  display: block;
 
+header h1 {
+    font-family: var(--title-font);
+    font-size: 3.5rem;
+    color: var(--text-color);
+    margin: 0;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #6c757d;
+}
+
+/* --- Page d'accueil : Bibliothèque --- */
+.book-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2.5rem;
+}
+
+.book {
+    cursor: pointer;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.book:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.book img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+.book .book-title {
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--card-bg);
+}
+
+/* --- Page des Citations --- */
+#quote-page h2 {
+    font-family: var(--title-font);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+#back-button {
+    background: none;
+    border: 1px solid #ced4da;
+    color: #495057;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+}
+
+#back-button:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+/* --- Bouton et Formulaire d'Ajout --- */
+.add-quote-button-container {
+    display: none;
+}
+
+#show-form-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 119, 182, 0.4);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#show-form-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 119, 182, 0.6);
+}
+
+.quote-form-container {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 350px;
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    z-index: 1000;
+}
+
+#quote-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-inputs {
+    display: flex;
+    gap: 1rem;
+}
+
+#quote-form input, #quote-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    font-size: 1rem;
+    font-family: var(--primary-font);
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+#quote-form input:focus, #quote-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
+}
+
+#quote-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+#quote-form button[type="submit"] {
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+#quote-form button[type="submit"]:hover {
+    background-color: #264653;
+}
+
+/* --- Cartes de Citations (Cards) --- */
+#quotes-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.quote-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    border-left: 5px solid var(--primary-color);
+}
+
+.quote-card.pinned {
+    background-color: var(--card-pinned-bg);
+}
+
+.quote-card .quote-content {
+    font-family: var(--title-font);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #343a40;
+    margin: 0 0 1rem 0;
+    line-height: 1.4;
+}
+
+.quote-card .quote-content::before {
+    content: '“';
+    font-size: 3rem;
+    color: var(--primary-color);
+    opacity: 0.5;
+    position: absolute;
+    left: 15px;
+    top: 5px;
+}
+
+.quote-card .quote-comment {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    color: #495057;
+    margin: 1.5rem 0;
+    border-top: 1px solid #e9ecef;
+}
+
+.quote-card .quote-info {
+    font-size: 0.9rem;
+    color: #6c757d;
+    text-align: right;
+    font-weight: 500;
+    border-top: 1px solid #e9ecef;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.quote-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.quote-card:hover .quote-buttons {
+    opacity: 1;
+}
+
+.pin-button, .delete-button {
+    background: #f1f3f5;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.pin-button:hover {
+    background: #ffe8a1;
+}
+
+.delete-button:hover {
+    background: #e5383b;
+    color: white;
+}
+
+/* --- Classe utilitaire --- */
+.hidden {
+    display: none !important;
 }
