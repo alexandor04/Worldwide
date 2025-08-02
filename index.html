@@ -1,44 +1,63 @@
-<!DOCTYPE html> 
-    <html lang="fr">
-        <head>  
-            <meta charset="utf-8">
-            <link href="style.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes révisions de Français</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-            <title >Le vrai Worldwide's blog</title>
-        </head>
-        <body>
-            <h1>Le vrai Worldwide's</h1>
-            <img src=" " alt="Logo" id ="logo" >
-            <section class="ligne">
-                <section class="sectionv">
-                    <h2 class="ref" > <a href="gpsavion.html">GPS, Galileo et au-delà : les technologies de navigation qui guident les avions avec une précision chirurgicale</a></h2>
-                    <p>Dans les cieux, chaque virage, chaque atterrissage repose sur des systèmes de navigation qui doivent être extremement précis. Quels systèmes de navigation sont utilisés par les avions ?</p>
-                    <button onclick="paraph()" class="btn">Voir l'article</button>
-                </section>
-                <section class="sectionv"> 
-                    <h2 class="ref"> <a href="Maintenancepre.html">La Maintenance Prédictive dans l'Aéronautique : Quand les Données Déjouent les Pannes</a></h2>
-                    <p> Les compagnies aérienne soucieuse de la sécurité de leur avion, mais aussi de leur portefeuille, mise beaucoup sur la maintenance prédictives. Mais comment cela fonctionne-t-il ?</p>
-                    <button onclick="paraph2()" class="btn">Voir l'article</button>
-                </section>
-                <section class="sectionv">
-                    <h2 class = "ref"><a href="Simulavion.html">Simulateurs de vol : quand le virtuel s'envole vers le réel</a></h2>
-                    <p> Résumé de l'article 3</p>
-                    <button onclick="paraph3()" class="btn">Voir l'article</button>
-                </section>
-            </section>  
-           
+    <div class="page-container">
+        <header>
+            <h1>Mes fiches de lecture</h1>
+            <p>Français - Prépas 2024-2025</p>
+        </header>
+
+        <main id="main-page">
+            <div class="book-container">
+                <div class="book" id="canguilhem">
+                    <img src="https://i.imgur.com/8l7d1bS.jpeg" alt="La connaissance de la vie - Canguilhem">
+                    <div class="book-title">La connaissance de la vie</div>
+                </div>
+                <div class="book" id="verne">
+                    <img src="https://i.imgur.com/odgG1gS.jpeg" alt="Vingt mille lieues sous les mers - Verne">
+                    <div class="book-title">Vingt mille lieues sous les mers</div>
+                </div>
+                <div class="book" id="haushofer">
+                    <img src="https://i.imgur.com/pmnlBQR.jpeg" alt="Le mur invisible - Haushofer">
+                    <div class="book-title">Le mur invisible</div>
+                </div>
+            </div>
+        </main>
+
+        <div id="quote-page" class="hidden">
+            <button id="back-button">← Retour à la bibliothèque</button>
+            <h2 id="quote-page-title"></h2>
+
+            <button id="show-form-button">+</button>
+
             
-            <div class = "center"><input type="text" id ="1" class="prct" placeholder="Changer la transparence (de 0 à 100)"></div> 
-            <br>
-            <script src="script.js"></script>
-            <footer class="site-footer">
-                <div class="container">
-                  <div class="footer-about">
-                    <h3>À propos </h3>
-                    <p>Un sujet, trois articles, c'est ainsi que fonctionne ce site.</p>
-                    <p>©Tous droits réservés.</p>
-                  </div>
-              </footer>
-        </body>
-    </html>
+            <div class="quote-form-container hidden">
+                <form id="quote-form">
+                    <textarea id="quote-text" placeholder="« La citation... »" required></textarea>
+                    <div class="form-inputs">
+                        <input type="text" id="quote-chapter" placeholder="Chapitre">
+                        <input type="text" id="quote-page-number" placeholder="Page">
+                    </div>
+                    <textarea id="quote-comment" placeholder="Mon commentaire personnel..."></textarea>
+                    <button type="submit">Enregistrer la citation</button>
+                </form>
+            </div>
 
+            <div id="quotes-list">
+                </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
