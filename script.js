@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bookData[currentBookId].quotes.push(newQuote);
         saveQuotesToStorage();
+        envoyerCitationAuServeur(newQuote, bookData[currentBookId].title);
         showQuotePageFor(currentBookId);
         quoteForm.reset();
         quoteFormContainer.classList.add('hidden');
@@ -161,3 +162,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadQuotesFromStorage();
 });
+
+function envoyerCitationAuServeur(quote, bookTitle) {
+    fetch('https://citations-server.onrender.com/ajouter-citation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            livre: bookTitle,
+            citation: quote.text,
+            chapitre: quote.chapter,
+            page: quote.pageNumber,
+            commentaire: quote.comment
+        })
+    })
+    .then(res => res.text())
+    .then(data => console.log('Serveur:', data))
+    .catch(err => console.error('Erreur serveur:', err));
+}
