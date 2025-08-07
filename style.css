@@ -1,4 +1,4 @@
-/* --- Configuration Générale & Polices --- */
+/* --- Configuration Générale & Polices --- *//*lo*/
 :root {
     --primary-font: 'Roboto', sans-serif;
     --title-font: 'Playfair Display', serif;
@@ -41,13 +41,13 @@ header p {
     color: #6c757d;
 }
 
+
 /* --- Page d'accueil : Bibliothèque --- */
 .book-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2.5rem;
 }
-
 .book {
     cursor: pointer;
     background-color: var(--card-bg);
@@ -105,9 +105,7 @@ header p {
 }
 
 /* --- Bouton et Formulaire d'Ajout --- */
-.add-quote-button-container {
-    display: none;
-}
+
 
 #show-form-button {
     position: fixed;
@@ -139,7 +137,7 @@ header p {
     position: fixed;
     bottom: 110px;
     right: 30px;
-    width: 350px;
+    width: 500px;
     background-color: var(--card-bg);
     padding: 1.5rem;
     border-radius: 12px;
