@@ -1,3 +1,21 @@
+// Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
+    authDomain: "citations-livres.firebaseapp.com",
+    databaseURL: "https://citations-livres-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "citations-livres",
+    storageBucket: "citations-livres.firebasestorage.app",
+    messagingSenderId: "351166565268",
+    appId: "1:351166565268:web:e7f694146cca0eec279d81"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const auth = firebase.auth();
