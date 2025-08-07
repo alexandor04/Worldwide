@@ -3,7 +3,7 @@
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
+  // Your web app's Firebase configuratio
   const firebaseConfig = {
     apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
     authDomain: "citations-livres.firebaseapp.com",
