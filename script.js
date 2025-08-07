@@ -1,3 +1,16 @@
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const auth = firebase.auth();
+
+// Connexion anonyme sécurisée
+auth.signInAnonymously()
+  .then(() => {
+    console.log("Connecté à Firebase (anonyme)");
+  })
+  .catch((error) => {
+    console.error("Erreur d'auth anonyme :", error);
+  });
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const mainPage = document.getElementById('main-page');
