@@ -1,14 +1,27 @@
-//hh
+const firebaseConfig = {
+  apiKey: "TA_CLE_API",
+  authDomain: "TON_PROJET.firebaseapp.com",
+  databaseURL: "https://TON_PROJET.firebaseio.com",
+  projectId: "TON_PROJET",
+  storageBucket: "TON_PROJET.appspot.com",
+  messagingSenderId: "1234567890",
+  appId: "1:1234567890:web:abc123def456"
+};
+
+// 🚀 Initialisation de Firebase
+firebase.initializeApp(firebaseConfig);
+
+// 🔗 Connexion à la base de données et auth
 const db = firebase.database();
 const auth = firebase.auth();
 
-// Connexion anonyme sécurij,
+// Connexion anonyme (si tu utilises ce mode)
 auth.signInAnonymously()
   .then(() => {
-    console.log("Connecté à Firebase (anonyme)");
+    console.log("Connecté à Firebase");
   })
   .catch((error) => {
-    console.error("Erreur d'auth anonyme :", error);
+    console.error("Erreur Firebase Auth :", error);
   });
 
 document.addEventListener('DOMContentLoaded', () => {
