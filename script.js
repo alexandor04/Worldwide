@@ -133,25 +133,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleAddQuote(event) {
-        event.preventDefault();
+    event.preventDefault();
 
-        const newQuote = {
-            text: document.getElementById('quote-text').value.trim(),
-            chapter: document.getElementById('quote-chapter').value.trim(),
-            pageNumber: document.getElementById('quote-page-number').value.trim(),
-            comment: document.getElementById('quote-comment').value.trim(),
-            pinned: false
-        };
+    const newQuote = {
+        text: document.getElementById('quote-text').value.trim(),
+        chapter: document.getElementById('quote-chapter').value.trim(),
+        pageNumber: document.getElementById('quote-page-number').value.trim(),
+        comment: document.getElementById('quote-comment').value.trim(),
+        pinned: false,
+        id: Date.now().toString()
+    };
 
-        if (!newQuote.text) return;
+    if (!newQuote.text) return;
 
-        bookData[currentBookId].quotes.push(newQuote);
-        saveQuotesToStorage();
-        envoyerCitationAuServeur(newQuote, bookData[currentBookId].title);
-        showQuotePageFor(currentBookId);
-        quoteForm.reset();
-        quoteFormContainer.classList.add('hidden');
+    // Enregistrement en localStorage (comme avant)
+    bookData[currentBookId].quotes.push(newQuote);
+    saveQuotesToStorage();
+    showQuotePageFor(currentBookId);
+    quoteForm.reset();
+    quoteFormContainer.classList.add('hidden');
+
+    // 🔐 Enregistrement dans Firebase
+    const user = firebase.auth().currentUser;
+
+    if (user) {
+        const path = `citations/${user.uid}/${currentBookId}/${newQuote.id}`;
+        firebase.database().ref(path).set({
+            text: newQuote.text,
+            chapter: newQuote.chapter,
+            pageNumber: newQuote.pageNumber,
+            comment: newQuote.comment,
+            pinned: newQuote.pinned
+        })
+        .then(() => console.log("✅ Citation enregistrée dans Firebase"))
+        .catch(error => console.error("❌ Erreur Firebase :", error));
+    } else {
+        console.warn("Utilisateur non connecté à Firebase");
     }
+}
+
 
     function deleteQuote(index) {
         if (confirm("Êtes-vous sûr de vouloir supprimer cette citation ?")) {
