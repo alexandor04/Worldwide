@@ -173,13 +173,29 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 
-    function deleteQuote(index) {
-        if (confirm("Êtes-vous sûr de vouloir supprimer cette citation ?")) {
-            bookData[currentBookId].quotes.splice(index, 1);
-            saveQuotesToStorage();
-            showQuotePageFor(currentBookId);
+ function deleteQuote(index) {
+    if (confirm("Êtes-vous sûr de vouloir supprimer cette citation ?")) {
+        const quoteToDelete = bookData[currentBookId].quotes[index];
+
+        // Suppression locale
+        bookData[currentBookId].quotes.splice(index, 1);
+        saveQuotesToStorage();
+        showQuotePageFor(currentBookId);
+
+        // Suppression dans Firebase
+        const user = firebase.auth().currentUser;
+
+        if (user && quoteToDelete.id) {
+            const path = `citations/${user.uid}/${currentBookId}/${quoteToDelete.id}`;
+            firebase.database().ref(path).remove()
+                .then(() => console.log("🗑️ Citation supprimée de Firebase"))
+                .catch(error => console.error("❌ Erreur suppression Firebase :", error));
+        } else {
+            console.warn("Impossible de supprimer la citation sur Firebase : UID ou ID manquant.");
         }
     }
+}
+
 
     function togglePin(index) {
         const quote = bookData[currentBookId].quotes[index];
