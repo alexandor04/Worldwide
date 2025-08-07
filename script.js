@@ -172,7 +172,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
-
  function deleteQuote(index) {
     if (confirm("Êtes-vous sûr de vouloir supprimer cette citation ?")) {
         const quoteToDelete = bookData[currentBookId].quotes[index];
@@ -195,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 }
-
 
     function togglePin(index) {
         const quote = bookData[currentBookId].quotes[index];
@@ -224,7 +222,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadQuotesFromStorage();
 });
-
 function envoyerCitationAuServeur(quote, bookTitle) {
     fetch('https://citations-server.onrender.com/ajouter-citation', {
         method: 'POST',
