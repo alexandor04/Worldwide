@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "TA_CLE_API",
-  authDomain: "TON_PROJET.firebaseapp.com",
-  databaseURL: "https://TON_PROJET.firebaseio.com",
-  projectId: "TON_PROJET",
-  storageBucket: "TON_PROJET.appspot.com",
-  messagingSenderId: "1234567890",
-  appId: "1:1234567890:web:abc123def456"
+  apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
+  authDomain: "citations-livres.firebaseapp.com",
+  databaseURL: "https://citations-livres-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "citations-livres",
+  storageBucket: "citations-livres.firebasestorage.app",
+  messagingSenderId: "351166565268",
+  appId: "1:351166565268:web:e7f694146cca0eec279d81"
 };
 
 // 🚀 Initialisation de Firebase
