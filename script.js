@@ -1,9 +1,10 @@
-// Import the functions you need from the SDKs you nee
+<script type="module">
+  // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuratio
+  // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
     authDomain: "citations-livres.firebaseapp.com",
@@ -16,6 +17,8 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+</script>
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const auth = firebase.auth();
