@@ -284,3 +284,66 @@ function envoyerCitationAuServeur(quote, bookTitle) {
     .then(data => console.log('Serveur:', data))
     .catch(err => console.error('Erreur serveur:', err));
 }
+
+// ==== Gestion des Personnages ====
+const showCharacterFormButton = document.getElementById('show-character-form-button');
+const characterPage = document.getElementById('character-page');
+const characterForm = document.getElementById('character-form');
+const charactersList = document.getElementById('characters-list');
+
+let charactersData = JSON.parse(localStorage.getItem('bookCharacters')) || [];
+
+// Afficher / masquer panneau gauche
+showCharacterFormButton.addEventListener('click', () => {
+    characterPage.classList.toggle('hidden');
+});
+
+// Sauvegarder personnages
+function saveCharacters() {
+    localStorage.setItem('bookCharacters', JSON.stringify(charactersData));
+}
+
+// Afficher liste
+function displayCharacters() {
+    charactersList.innerHTML = '';
+    charactersData.forEach((char, index) => {
+        const card = document.createElement('div');
+        card.classList.add('character-card');
+        card.innerHTML = `
+            <strong>${char.name}</strong><br>
+            Rôle : ${char.role || '—'}<br>
+            Lien avec principal : ${char.linkMain || '—'}<br>
+            Lien avec autre : ${char.linkOther || '—'}<br>
+            <em>Citations :</em> ${char.quotes || '—'}<br>
+            <button onclick="deleteCharacter(${index})" style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;">Supprimer</button>
+        `;
+        charactersList.appendChild(card);
+    });
+}
+
+// Supprimer personnage
+window.deleteCharacter = function(index) {
+    charactersData.splice(index, 1);
+    saveCharacters();
+    displayCharacters();
+};
+
+// Ajout personnage
+characterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newCharacter = {
+        name: document.getElementById('char-name').value.trim(),
+        role: document.getElementById('char-role').value.trim(),
+        linkMain: document.getElementById('char-link-main').value.trim(),
+        linkOther: document.getElementById('char-link-other').value.trim(),
+        quotes: document.getElementById('char-quotes').value.trim()
+    };
+    charactersData.push(newCharacter);
+    saveCharacters();
+    displayCharacters();
+    characterForm.reset();
+});
+
+// Afficher au chargement
+displayCharacters();
+
