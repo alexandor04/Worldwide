@@ -43,6 +43,12 @@ document.addEventListener('DOMContentLoaded', () => {
         verne: { title: "Vingt mille lieues sous les mers", quotes: [] },
         haushofer: { title: "Le mur invisible", quotes: [] }
     };
+  const showCharactersButton = document.getElementById('show-characters-button');
+  const charactersPanel = document.getElementById('characters-panel');
+  const characterForm = document.getElementById('character-form');
+  const charactersList = document.getElementById('characters-list');
+
+  let charactersData = [];
 
     function loadQuotesFromStorage() {
         const savedQuotes = JSON.parse(localStorage.getItem('bookQuotes'));
@@ -195,6 +201,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }
 
+  // Afficher / cacher la colonne
+showCharactersButton.addEventListener('click', () => {
+    charactersPanel.classList.toggle('hidden');
+});
+
+// Ajouter un personnage
+characterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const newCharacter = {
+        name: document.getElementById('char-name').value.trim(),
+        role: document.getElementById('char-role').value.trim(),
+        linkMain: document.getElementById('char-link-main').value.trim(),
+        linkOther: document.getElementById('char-link-other').value.trim(),
+        quotes: document.getElementById('char-quotes').value.trim()
+    };
+    charactersData.push(newCharacter);
+    displayCharacters();
+    characterForm.reset();
+});
+
+// Afficher la liste
+function displayCharacters() {
+    charactersList.innerHTML = '';
+    charactersData.forEach((char, index) => {
+        const div = document.createElement('div');
+        div.classList.add('character-card');
+        div.innerHTML = `
+            <strong>${char.name}</strong><br>
+            Rôle : ${char.role}<br>
+            Lien avec principal : ${char.linkMain}<br>
+            Lien avec autre : ${char.linkOther}<br>
+            <em>Citations :</em> ${char.quotes}
+        `;
+        charactersList.appendChild(div);
+    });
+}
+
+  
     function togglePin(index) {
         const quote = bookData[currentBookId].quotes[index];
         quote.pinned = !quote.pinned;
