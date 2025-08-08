@@ -264,28 +264,7 @@ function displayCharacters() {
 
     quoteForm.addEventListener('submit', handleAddQuote);
 
-    loadQuotesFromStorage();
-});
-function envoyerCitationAuServeur(quote, bookTitle) {
-    fetch('https://citations-server.onrender.com/ajouter-citation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            livre: bookTitle,
-            citation: quote.text,
-            chapitre: quote.chapter,
-            page: quote.pageNumber,
-            commentaire: quote.comment
-        })
-    })
-    .then(res => res.text())
-    .then(data => console.log('Serveur:', data))
-    .catch(err => console.error('Erreur serveur:', err));
-}
-
-// ==== Gestion des Personnages ====
+  // ==== Gestion des Personnages ====
 const showCharacterFormButton = document.getElementById('show-character-form-button');
 const characterPage = document.getElementById('character-page');
 const characterForm = document.getElementById('character-form');
@@ -347,3 +326,24 @@ characterForm.addEventListener('submit', (e) => {
 // Afficher au chargement
 displayCharacters();
 
+
+    loadQuotesFromStorage();
+});
+function envoyerCitationAuServeur(quote, bookTitle) {
+    fetch('https://citations-server.onrender.com/ajouter-citation', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            livre: bookTitle,
+            citation: quote.text,
+            chapitre: quote.chapter,
+            page: quote.pageNumber,
+            commentaire: quote.comment
+        })
+    })
+    .then(res => res.text())
+    .then(data => console.log('Serveur:', data))
+    .catch(err => console.error('Erreur serveur:', err));
+}
