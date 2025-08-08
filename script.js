@@ -43,13 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         verne: { title: "Vingt mille lieues sous les mers", quotes: [] },
         haushofer: { title: "Le mur invisible", quotes: [] }
     };
-  const showCharactersButton = document.getElementById('show-characters-button');
-  const charactersPanel = document.getElementById('characters-panel');
-  const characterForm = document.getElementById('character-form');
-  const charactersList = document.getElementById('characters-list');
-
-  let charactersData = [];
-
+  
     function loadQuotesFromStorage() {
         const savedQuotes = JSON.parse(localStorage.getItem('bookQuotes'));
         if (savedQuotes) {
@@ -264,21 +258,25 @@ function displayCharacters() {
 
     quoteForm.addEventListener('submit', handleAddQuote);
 
-  // ==== Gestion des Personnages ====
+// ==== Gestion des Personnages ====
 const showCharacterFormButton = document.getElementById('show-character-form-button');
 const characterPage = document.getElementById('character-page');
+const characterForm = document.getElementById('character-form');
+const charactersList = document.getElementById('characters-list');
+
+let charactersData = JSON.parse(localStorage.getItem('bookCharacters')) || [];
 
 // Afficher / masquer panneau gauche
-showCharacterFormButton.addEventListener('click', () => {
-    characterPage.classList.toggle('hidden');
-});
+if (showCharacterFormButton) {
+    showCharacterFormButton.addEventListener('click', () => {
+        characterPage.classList.toggle('hidden');
+    });
+}
 
-// Sauvegarder personnages
 function saveCharacters() {
     localStorage.setItem('bookCharacters', JSON.stringify(charactersData));
 }
 
-// Afficher liste
 function displayCharacters() {
     charactersList.innerHTML = '';
     charactersData.forEach((char, index) => {
@@ -296,14 +294,12 @@ function displayCharacters() {
     });
 }
 
-// Supprimer personnage
 window.deleteCharacter = function(index) {
     charactersData.splice(index, 1);
     saveCharacters();
     displayCharacters();
 };
 
-// Ajout personnage
 characterForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const newCharacter = {
@@ -319,7 +315,6 @@ characterForm.addEventListener('submit', (e) => {
     characterForm.reset();
 });
 
-// Afficher au chargement
 displayCharacters();
 
 
