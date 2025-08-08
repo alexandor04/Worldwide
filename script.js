@@ -268,8 +268,6 @@ function displayCharacters() {
 const showCharacterFormButton = document.getElementById('show-character-form-button');
 const characterPage = document.getElementById('character-page');
 
-let charactersData = JSON.parse(localStorage.getItem('bookCharacters')) || [];
-
 // Afficher / masquer panneau gauche
 showCharacterFormButton.addEventListener('click', () => {
     characterPage.classList.toggle('hidden');
