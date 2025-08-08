@@ -267,7 +267,6 @@ function displayCharacters() {
   // ==== Gestion des Personnages ====
 const showCharacterFormButton = document.getElementById('show-character-form-button');
 const characterPage = document.getElementById('character-page');
-const charactersList = document.getElementById('characters-list');
 
 let charactersData = JSON.parse(localStorage.getItem('bookCharacters')) || [];
 
