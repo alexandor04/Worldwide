@@ -265,7 +265,7 @@ window.deleteCharacter = function(index) {
 // Ajouter un personnage
 if (characterForm) {
     characterForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // 🚫 Empêche le rechargement de la page
+        e.preventDefault(); // 🚫 Empêche le rechargement de la pag
 
         const newCharacter = {
             name: document.getElementById('char-name').value.trim(),
