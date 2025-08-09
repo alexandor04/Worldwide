@@ -220,6 +220,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     quoteForm.addEventListener('submit', handleAddQuote);
 
+  // Gestion ouverture/fermeture du panneau personnages
+const showCharacterButton = document.getElementById('show-character-form-button');
+const charactersPanel = document.getElementById('characters-panel');
+
+if (showCharacterButton && charactersPanel) {
+    showCharacterButton.addEventListener('click', () => {
+        charactersPanel.classList.toggle('hidden');
+    });
+}
+
 // ==== Gestion de Personnages ====
 const characterForm = document.getElementById('character-form');
 const charactersList = document.getElementById('characters-list');
