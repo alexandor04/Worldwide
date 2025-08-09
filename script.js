@@ -11,7 +11,7 @@ const firebaseConfig = {
 // 🚀 Initialisation de Firebas
 firebase.initializeApp(firebaseConfig);
 
-// 🔗 Connexion à la base de donncccccées et,,h,haf
+// 🔗 Connexio à la base de donncccccées et,,h,haf
 const db = firebase.database();
 const auth = firebase.auth();
 
