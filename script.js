@@ -221,19 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
     quoteForm.addEventListener('submit', handleAddQuote);
 
 // ==== Gestion des Personnages ====
-const showCharacterFormButton = document.getElementById('show-character-form-button');
-const characterPage = document.getElementById('character-page');
 const characterForm = document.getElementById('character-form');
 const charactersList = document.getElementById('characters-list');
 
 let charactersData = JSON.parse(localStorage.getItem('bookCharacters')) || [];
-
-// Afficher / masquer panneau gauche
-if (showCharacterFormButton) {
-    showCharacterFormButton.addEventListener('click', () => {
-        characterPage.classList.toggle('hidden');
-    });
-}
 
 function saveCharacters() {
     localStorage.setItem('bookCharacters', JSON.stringify(charactersData));
@@ -245,17 +236,13 @@ function displayCharacters() {
         const card = document.createElement('div');
         card.classList.add('character-card');
         card.innerHTML = `
-    <strong>${char.name}</strong><br>
-    Rôle : ${char.role || '—'}<br>
-    Lien avec principal : ${char.linkMain || '—'}<br>
-    Lien avec autre : ${char.linkOther || '—'}<br>
-    <em>Citations :</em> ${char.quotes || '—'}<br>
-    <button onclick="deleteCharacter(${index})" 
-        style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;">
-        Supprimer
-    </button>
-`;
-        ;
+            <strong>${char.name}</strong><br>
+            Rôle : ${char.role || '—'}<br>
+            Lien avec principal : ${char.linkMain || '—'}<br>
+            Lien avec autre : ${char.linkOther || '—'}<br>
+            <em>Citations :</em> ${char.quotes || '—'}<br>
+            <button onclick="deleteCharacter(${index})" style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;">Supprimer</button>
+        `;
         charactersList.appendChild(card);
     });
 }
@@ -266,10 +253,9 @@ window.deleteCharacter = function(index) {
     displayCharacters();
 };
 
-// Ajouter un personnage
 if (characterForm) {
     characterForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // 🚫 Empêche le rechargement de la pag
+        e.preventDefault(); // 🚫 Empêche le rechargement
 
         const newCharacter = {
             name: document.getElementById('char-name').value.trim(),
@@ -279,7 +265,6 @@ if (characterForm) {
             quotes: document.getElementById('char-quotes').value.trim()
         };
 
-        // Ne rien faire si aucun nom
         if (!newCharacter.name) {
             alert("Veuillez entrer au moins un nom de personnage");
             return;
@@ -291,6 +276,7 @@ if (characterForm) {
         characterForm.reset();
     });
 }
+
 displayCharacters();
 
 
