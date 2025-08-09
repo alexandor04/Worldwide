@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     quoteForm.addEventListener('submit', handleAddQuote);
 
-// ==== Gestion des Personnages ====
+// ==== Gestion de Personnages ====
 const characterForm = document.getElementById('character-form');
 const charactersList = document.getElementById('characters-list');
 
