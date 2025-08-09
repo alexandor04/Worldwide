@@ -244,14 +244,14 @@ function displayCharacters() {
     charactersData.forEach((char, index) => {
         const card = document.createElement('div');
         card.classList.add('character-card');
-        card.innerHTML = '
+        card.innerHTML = 
             <strong>${char.name}</strong><br>
             Rôle : ${char.role || '—'}<br>
             Lien avec principal : ${char.linkMain || '—'}<br>
             Lien avec autre : ${char.linkOther || '—'}<br>
             <em>Citations :</em> ${char.quotes || '—'}<br>
             <button onclick="deleteCharacter(${index})" style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;> Supprimer</button>
-        ';
+        ;
         charactersList.appendChild(card);
     });
 }
