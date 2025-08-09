@@ -244,14 +244,14 @@ function displayCharacters() {
     charactersData.forEach((char, index) => {
         const card = document.createElement('div');
         card.classList.add('character-card');
-        card.innerHTML = `
+        card.innerHTML = '
             <strong>${char.name}</strong><br>
             Rôle : ${char.role || '—'}<br>
             Lien avec principal : ${char.linkMain || '—'}<br>
             Lien avec autre : ${char.linkOther || '—'}<br>
             <em>Citations :</em> ${char.quotes || '—'}<br>
-            <button onclick="deleteCharacter(${index})" style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;">Supprimer</button>
-        `;
+            <button onclick="deleteCharacter(${index})" style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;> Supprimer</button>
+        ';
         charactersList.appendChild(card);
     });
 }
@@ -262,21 +262,31 @@ window.deleteCharacter = function(index) {
     displayCharacters();
 };
 
-characterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newCharacter = {
-        name: document.getElementById('char-name').value.trim(),
-        role: document.getElementById('char-role').value.trim(),
-        linkMain: document.getElementById('char-link-main').value.trim(),
-        linkOther: document.getElementById('char-link-other').value.trim(),
-        quotes: document.getElementById('char-quotes').value.trim()
-    };
-    charactersData.push(newCharacter);
-    saveCharacters();
-    displayCharacters();
-    characterForm.reset();
-});
+// Ajouter un personnage
+if (characterForm) {
+    characterForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // 🚫 Empêche le rechargement de la page
 
+        const newCharacter = {
+            name: document.getElementById('char-name').value.trim(),
+            role: document.getElementById('char-role').value.trim(),
+            linkMain: document.getElementById('char-link-main').value.trim(),
+            linkOther: document.getElementById('char-link-other').value.trim(),
+            quotes: document.getElementById('char-quotes').value.trim()
+        };
+
+        // Ne rien faire si aucun nom
+        if (!newCharacter.name) {
+            alert("Veuillez entrer au moins un nom de personnage");
+            return;
+        }
+
+        charactersData.push(newCharacter);
+        saveCharacters();
+        displayCharacters();
+        characterForm.reset();
+    });
+}
 displayCharacters();
 
 
