@@ -43,15 +43,19 @@
     <!-- Colonne gauche : Personnages -->
     <div>
         <h2 style="text-align:center; font-family: var(--title-font);">Personnages</h2>
-        <form id="character-form" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
-            <input type="text" id="char-name" placeholder="Nom & prénom" required>
-            <input type="text" id="char-role" placeholder="Rôle">
-            <input type="text" id="char-link-main" placeholder="Lien avec le personnage principal">
-            <input type="text" id="char-link-other" placeholder="Lien avec un autre personnage">
-            <textarea id="char-quotes" placeholder="Citations sur le personnage"></textarea>
-            <button type="submit">Ajouter le personnage</button>
-        </form>
-        <div id="characters-list"></div>
+
+<div class="character-form-container">
+    <form id="character-form">
+        <input type="text" id="char-name" placeholder="Nom & prénom" required>
+        <input type="text" id="char-role" placeholder="Rôle">
+        <input type="text" id="char-link-main" placeholder="Lien avec le personnage principal">
+        <input type="text" id="char-link-other" placeholder="Lien avec un autre personnage">
+        <textarea id="char-quotes" placeholder="Citations sur le personnage"></textarea>
+        <button type="submit">Ajouter le personnage</button>
+    </form>
+</div>
+
+<div id="characters-list"></div>
     </div>
 
     <!-- Colonne droite : Citations -->
