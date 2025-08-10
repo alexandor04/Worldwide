@@ -455,6 +455,7 @@ header p {
     font-size: 1.1rem;
     font-weight: 500;
     transition: background-color 0.3s;
+    z-index: 1001;
 }
 
 #character-form button[type="submit"]:hover {
