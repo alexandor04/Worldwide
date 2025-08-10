@@ -3,59 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes révisions de Français</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Bibliothèque de citations</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    
 </head>
 <body>
 
-    <div class="page-container">
-        <header>
-            <h1>Mes fiches de lecture</h1>
-            <p>Français - Prépas 2024-2025</p>
-        </header>
+<!-- PAGE PRINCIPALE -->
+<div id="main-page">
+    <h1>Ma bibliothèque</h1>
+    <div id="books-container">
+        <div id="canguilhem" class="book">📖 La connaissance de la vie</div>
+        <div id="verne" class="book">🌊 Vingt mille lieues sous les mers</div>
+        <div id="haushofer" class="book">🏔️ Le mur invisible</div>
+    </div>
+</div>
 
-        <main id="main-page">
-            <div class="book-container">
-                <div class="book" id="canguilhem">
-                    <img src="https://static.fnac-static.com/multimedia/PE/Images/FR/NR/09/ad/00/44297/1507-1/tsp20250720154327/La-connaiance-de-la-vie.jpg">
-                    <div class="book-title">La connaissance de la vie</div>
-                </div>
-                <div class="book" id="verne">
-                    <img src="https://editions.flammarion.com/media/cache/couverture_large/flammarion_img/Couvertures/9782080486004.jpg">
-                    <div class="book-title">Vingt mille lieues sous les mers</div>
-                </div>
-                <div class="book" id="haushofer">
-                    <img src="https://actes-sud.fr/sites/default/files/couvertures/9782330128715.jpg">
-                    <div class="book-title">Le mur invisible</div>
-                </div>
-            </div>
-        </main>
-
-          <div id="quote-page" class="hidden" style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
+<!-- PAGE CITATIONS + PERSONNAGES -->
+<div id="quote-page" class="hidden" style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
 
     <!-- Colonne gauche : Personnages -->
     <div>
         <h2 style="text-align:center; font-family: var(--title-font);">Personnages</h2>
 
-<div class="character-form-container">
-    <form id="character-form">
-        <input type="text" id="char-name" placeholder="Nom & prénom" required>
-        <input type="text" id="char-role" placeholder="Rôle">
-        <input type="text" id="char-link-main" placeholder="Lien avec le personnage principal">
-        <input type="text" id="char-link-other" placeholder="Lien avec un autre personnage">
-        <textarea id="char-quotes" placeholder="Citations sur le personnage"></textarea>
-        <button type="submit">Ajouter le personnage</button>
-    </form>
-</div>
+        <!-- Bouton flottant pour formulaire personnages -->
+        <button id="show-character-form-button">👤</button>
 
-<div id="characters-list"></div>
+        <!-- Formulaire personnages (masqué par défaut) -->
+        <div class="character-form-container hidden">
+            <form id="character-form">
+                <input type="text" id="char-name" placeholder="Nom & prénom" required>
+                <input type="text" id="char-role" placeholder="Rôle">
+                <input type="text" id="char-link-main" placeholder="Lien avec le personnage principal">
+                <input type="text" id="char-link-other" placeholder="Lien avec un autre personnage">
+                <textarea id="char-quotes" placeholder="Citations sur le personnage"></textarea>
+                <button type="submit">Ajouter le personnage</button>
+            </form>
+        </div>
+
+        <!-- Liste des personnages -->
+        <div id="characters-list"></div>
     </div>
 
     <!-- Colonne droite : Citations -->
@@ -63,8 +49,8 @@
         <button id="back-button">← Retour à la bibliothèque</button>
         <h2 id="quote-page-title"></h2>
         <button id="show-form-button">+</button>
-        <button id="show-character-form-button">👤</button>
 
+        <!-- Formulaire citations -->
         <div class="quote-form-container hidden">
             <form id="quote-form">
                 <textarea id="quote-text" placeholder="« La citation... »" required></textarea>
@@ -77,11 +63,16 @@
             </form>
         </div>
 
-            <div id="quotes-list">
-                </div>
-        </div>
+        <!-- Liste citations -->
+        <div id="quotes-list"></div>
     </div>
 
-    <script src="script.js"></script>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
