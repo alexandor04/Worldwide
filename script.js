@@ -1,4 +1,4 @@
-// --- Configuration Firebase ---
+// --- Configuration Firebase cg---
 const firebaseConfig = {
     apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
     authDomain: "citations-livres.firebaseapp.com",
