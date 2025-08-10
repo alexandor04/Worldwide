@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (savedChars) {
             charactersData = savedChars;
         }
+        // On s'assure que chaque livre a bien un tableau
+        if (!charactersData.canguilhem) charactersData.canguilhem = [];
+        if (!charactersData.verne) charactersData.verne = [];
+        if (!charactersData.haushofer) charactersData.haushofer = [];
     }
 
     function saveCharacters() {
@@ -204,6 +208,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Gestion personnages ---
     function displayCharacters() {
         charactersList.innerHTML = '';
+        if (!charactersData[currentBookId]) {
+            charactersData[currentBookId] = [];
+        }
         charactersData[currentBookId].forEach((char, index) => {
             const card = document.createElement('div');
             card.classList.add('character-card');
@@ -240,6 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!newCharacter.name) {
                 alert("Veuillez entrer au moins un nom de personnage");
                 return;
+            }
+
+            if (!charactersData[currentBookId]) {
+                charactersData[currentBookId] = [];
             }
 
             charactersData[currentBookId].push(newCharacter);
