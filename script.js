@@ -1,31 +1,26 @@
+// --- Configuration Firebase ---
 const firebaseConfig = {
-  apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
-  authDomain: "citations-livres.firebaseapp.com",
-  databaseURL: "https://citations-livres-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "citations-livres",
-  storageBucket: "citations-livres.firebasestorage.app",
-  messagingSenderId: "351166565268",
-  appId: "1:351166565268:web:e7f694146cca0eec279d81"
+    apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
+    authDomain: "citations-livres.firebaseapp.com",
+    databaseURL: "https://citations-livres-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "citations-livres",
+    storageBucket: "citations-livres.firebasestorage.app",
+    messagingSenderId: "351166565268",
+    appId: "1:351166565268:web:e7f694146cca0eec279d81"
 };
 
-// 🚀 Initialisation de Firebas
 firebase.initializeApp(firebaseConfig);
 
-// 🔗 Connexio à la base de donncccccées et,,h,haf
 const db = firebase.database();
 const auth = firebase.auth();
 
-// Connexion anonyme (si tu utilises ce mode)
 auth.signInAnonymously()
-  .then(() => {
-    console.log("Connecté à Firebase");
-  })
-  .catch((error) => {
-    console.error("Erreur Firebase Auth :", error);
-  });
+    .then(() => console.log("✅ Connecté à Firebase"))
+    .catch(error => console.error("❌ Erreur Firebase Auth :", error));
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Sélecteurs ---
     const mainPage = document.getElementById('main-page');
     const quotePage = document.getElementById('quote-page');
     const books = document.querySelectorAll('.book');
@@ -36,20 +31,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const quoteFormContainer = document.querySelector('.quote-form-container');
     const quoteForm = document.getElementById('quote-form');
 
+    const characterForm = document.getElementById('character-form');
+    const charactersList = document.getElementById('characters-list');
+
     let currentBookId = null;
 
+    // --- Données locales ---
     const bookData = {
         canguilhem: { title: "La connaissance de la vie", quotes: [] },
         verne: { title: "Vingt mille lieues sous les mers", quotes: [] },
         haushofer: { title: "Le mur invisible", quotes: [] }
     };
-  
+
+    let charactersData = {
+        canguilhem: [],
+        verne: [],
+        haushofer: []
+    };
+
+    // --- Sauvegarde / Chargement ---
     function loadQuotesFromStorage() {
         const savedQuotes = JSON.parse(localStorage.getItem('bookQuotes'));
         if (savedQuotes) {
-            bookData.canguilhem.quotes = savedQuotes.canguilhem?.quotes || [];
-            bookData.verne.quotes = savedQuotes.verne?.quotes || [];
-            bookData.haushofer.quotes = savedQuotes.haushofer?.quotes || [];
+            Object.keys(bookData).forEach(bookId => {
+                bookData[bookId].quotes = savedQuotes[bookId]?.quotes || [];
+            });
         }
     }
 
@@ -57,12 +63,22 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('bookQuotes', JSON.stringify(bookData));
     }
 
+    function loadCharactersFromStorage() {
+        const savedChars = JSON.parse(localStorage.getItem('bookCharacters'));
+        if (savedChars) {
+            charactersData = savedChars;
+        }
+    }
+
+    function saveCharacters() {
+        localStorage.setItem('bookCharacters', JSON.stringify(charactersData));
+    }
+
+    // --- Affichage des citations ---
     function displayQuote(quoteObject, index) {
         const card = document.createElement('div');
         card.classList.add('quote-card');
-        if (quoteObject.pinned) {
-            card.classList.add('pinned');
-        }
+        if (quoteObject.pinned) card.classList.add('pinned');
 
         const buttonBar = document.createElement('div');
         buttonBar.classList.add('quote-buttons');
@@ -70,9 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pinBtn = document.createElement('button');
         pinBtn.classList.add('pin-button');
         pinBtn.innerHTML = quoteObject.pinned ? '📌' : '📍';
-        if (quoteObject.pinned) {
-            pinBtn.classList.add('pinned');
-        }
+        if (quoteObject.pinned) pinBtn.classList.add('pinned');
         pinBtn.onclick = () => togglePin(index);
 
         const deleteBtn = document.createElement('button');
@@ -104,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         quotesList.appendChild(card);
     }
 
+    // --- Affichage page citations ---
     function showQuotePageFor(bookId) {
         currentBookId = bookId;
         const book = bookData[bookId];
@@ -120,81 +135,65 @@ document.addEventListener('DOMContentLoaded', () => {
                 return pageA - pageB;
             });
 
-            book.quotes.forEach((quote, index) => {
-                displayQuote(quote, index);
-            });
+            book.quotes.forEach((quote, index) => displayQuote(quote, index));
         } else {
             quotesList.innerHTML = '<p style="text-align: center; color: #6c757d;">Aucune citation pour le moment. Ajoutez-en une !</p>';
         }
+
+        displayCharacters(); // Affiche les persos du livre courant
 
         mainPage.classList.add('hidden');
         quotePage.classList.remove('hidden');
         quoteFormContainer.classList.add('hidden');
     }
 
+    // --- Gestion citations ---
     function handleAddQuote(event) {
-    event.preventDefault();
+        event.preventDefault();
 
-    const newQuote = {
-        text: document.getElementById('quote-text').value.trim(),
-        chapter: document.getElementById('quote-chapter').value.trim(),
-        pageNumber: document.getElementById('quote-page-number').value.trim(),
-        comment: document.getElementById('quote-comment').value.trim(),
-        pinned: false,
-        id: Date.now().toString()
-    };
+        const newQuote = {
+            text: document.getElementById('quote-text').value.trim(),
+            chapter: document.getElementById('quote-chapter').value.trim(),
+            pageNumber: document.getElementById('quote-page-number').value.trim(),
+            comment: document.getElementById('quote-comment').value.trim(),
+            pinned: false,
+            id: Date.now().toString()
+        };
 
-    if (!newQuote.text) return;
+        if (!newQuote.text) return;
 
-    // Enregistrement en localStorage (comme avant)
-    bookData[currentBookId].quotes.push(newQuote);
-    saveQuotesToStorage();
-    showQuotePageFor(currentBookId);
-    quoteForm.reset();
-    quoteFormContainer.classList.add('hidden');
-
-    // 🔐 Enregistrement dans Firebase
-    const user = firebase.auth().currentUser;
-
-    if (user) {
-        const path = `citations/${user.uid}/${currentBookId}/${newQuote.id}`;
-        firebase.database().ref(path).set({
-            text: newQuote.text,
-            chapter: newQuote.chapter,
-            pageNumber: newQuote.pageNumber,
-            comment: newQuote.comment,
-            pinned: newQuote.pinned
-        })
-        .then(() => console.log("✅ Citation enregistrée dans Firebase"))
-        .catch(error => console.error("❌ Erreur Firebase :", error));
-    } else {
-        console.warn("Utilisateur non connecté à Firebase");
-    }
-}
-
- function deleteQuote(index) {
-    if (confirm("Êtes-vous sûr de vouloir supprimer cette citation ?")) {
-        const quoteToDelete = bookData[currentBookId].quotes[index];
-
-        // Suppression locale
-        bookData[currentBookId].quotes.splice(index, 1);
+        bookData[currentBookId].quotes.push(newQuote);
         saveQuotesToStorage();
         showQuotePageFor(currentBookId);
+        quoteForm.reset();
+        quoteFormContainer.classList.add('hidden');
 
-        // Suppression dans Firebase
         const user = firebase.auth().currentUser;
-
-        if (user && quoteToDelete.id) {
-            const path = `citations/${user.uid}/${currentBookId}/${quoteToDelete.id}`;
-            firebase.database().ref(path).remove()
-                .then(() => console.log("🗑️ Citation supprimée de Firebase"))
-                .catch(error => console.error("❌ Erreur suppression Firebase :", error));
-        } else {
-            console.warn("Impossible de supprimer la citation sur Firebase : UID ou ID manquant.");
+        if (user) {
+            const path = `citations/${user.uid}/${currentBookId}/${newQuote.id}`;
+            firebase.database().ref(path).set(newQuote)
+                .then(() => console.log("✅ Citation enregistrée"))
+                .catch(error => console.error("❌ Erreur Firebase :", error));
         }
     }
-}
-  
+
+    function deleteQuote(index) {
+        if (confirm("Supprimer cette citation ?")) {
+            const quoteToDelete = bookData[currentBookId].quotes[index];
+            bookData[currentBookId].quotes.splice(index, 1);
+            saveQuotesToStorage();
+            showQuotePageFor(currentBookId);
+
+            const user = firebase.auth().currentUser;
+            if (user && quoteToDelete.id) {
+                const path = `citations/${user.uid}/${currentBookId}/${quoteToDelete.id}`;
+                firebase.database().ref(path).remove()
+                    .then(() => console.log("🗑️ Citation supprimée"))
+                    .catch(error => console.error("❌ Erreur suppression :", error));
+            }
+        }
+    }
+
     function togglePin(index) {
         const quote = bookData[currentBookId].quotes[index];
         quote.pinned = !quote.pinned;
@@ -202,6 +201,55 @@ document.addEventListener('DOMContentLoaded', () => {
         showQuotePageFor(currentBookId);
     }
 
+    // --- Gestion personnages ---
+    function displayCharacters() {
+        charactersList.innerHTML = '';
+        charactersData[currentBookId].forEach((char, index) => {
+            const card = document.createElement('div');
+            card.classList.add('character-card');
+            card.innerHTML = `
+                <strong>${char.name}</strong><br>
+                Rôle : ${char.role || '—'}<br>
+                Lien avec principal : ${char.linkMain || '—'}<br>
+                Lien avec autre : ${char.linkOther || '—'}<br>
+                <em>Citations :</em> ${char.quotes || '—'}<br>
+                <button onclick="deleteCharacter(${index})">Supprimer</button>
+            `;
+            charactersList.appendChild(card);
+        });
+    }
+
+    window.deleteCharacter = function(index) {
+        charactersData[currentBookId].splice(index, 1);
+        saveCharacters();
+        displayCharacters();
+    };
+
+    if (characterForm) {
+        characterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newCharacter = {
+                name: document.getElementById('char-name').value.trim(),
+                role: document.getElementById('char-role').value.trim(),
+                linkMain: document.getElementById('char-link-main').value.trim(),
+                linkOther: document.getElementById('char-link-other').value.trim(),
+                quotes: document.getElementById('char-quotes').value.trim()
+            };
+
+            if (!newCharacter.name) {
+                alert("Veuillez entrer au moins un nom de personnage");
+                return;
+            }
+
+            charactersData[currentBookId].push(newCharacter);
+            saveCharacters();
+            displayCharacters();
+            characterForm.reset();
+        });
+    }
+
+    // --- Événements livres ---
     books.forEach(book => {
         book.addEventListener('click', () => {
             showQuotePageFor(book.id);
@@ -220,93 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     quoteForm.addEventListener('submit', handleAddQuote);
 
-  // Gestion ouverture/fermeture du panneau personnages
-const showCharacterButton = document.getElementById('show-character-form-button');
-const charactersPanel = document.getElementById('characters-panel');
-
-if (showCharacterButton && charactersPanel) {
-    showCharacterButton.addEventListener('click', () => {
-        charactersPanel.classList.toggle('hidden');
-    });
-}
-
-// ==== Gestion de Personnages ====
-const characterForm = document.getElementById('character-form');
-const charactersList = document.getElementById('characters-list');
-
-let charactersData = JSON.parse(localStorage.getItem('bookCharacters')) || [];
-
-function saveCharacters() {
-    localStorage.setItem('bookCharacters', JSON.stringify(charactersData));
-}
-
-function displayCharacters() {
-    charactersList.innerHTML = '';
-    charactersData.forEach((char, index) => {
-        const card = document.createElement('div');
-        card.classList.add('character-card');
-        card.innerHTML = `
-            <strong>${char.name}</strong><br>
-            Rôle : ${char.role || '—'}<br>
-            Lien avec principal : ${char.linkMain || '—'}<br>
-            Lien avec autre : ${char.linkOther || '—'}<br>
-            <em>Citations :</em> ${char.quotes || '—'}<br>
-            <button onclick="deleteCharacter(${index})" style="margin-top:5px;background:#e63946;color:white;border:none;padding:4px 8px;border-radius:4px;">Supprimer</button>
-        `;
-        charactersList.appendChild(card);
-    });
-}
-
-window.deleteCharacter = function(index) {
-    charactersData.splice(index, 1);
-    saveCharacters();
-    displayCharacters();
-};
-
-if (characterForm) {
-    characterForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // 🚫 Empêche le rechargement
-
-        const newCharacter = {
-            name: document.getElementById('char-name').value.trim(),
-            role: document.getElementById('char-role').value.trim(),
-            linkMain: document.getElementById('char-link-main').value.trim(),
-            linkOther: document.getElementById('char-link-other').value.trim(),
-            quotes: document.getElementById('char-quotes').value.trim()
-        };
-
-        if (!newCharacter.name) {
-            alert("Veuillez entrer au moins un nom de personnage");
-            return;
-        }
-
-        charactersData.push(newCharacter);
-        saveCharacters();
-        displayCharacters();
-        characterForm.reset();
-    });
-}
-
-displayCharacters();
-
-
+    // --- Initialisation ---
     loadQuotesFromStorage();
+    loadCharactersFromStorage();
 });
-function envoyerCitationAuServeur(quote, bookTitle) {
-    fetch('https://citations-server.onrender.com/ajouter-citation', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            livre: bookTitle,
-            citation: quote.text,
-            chapitre: quote.chapter,
-            page: quote.pageNumber,
-            commentaire: quote.comment
-        })
-    })
-    .then(res => res.text())
-    .then(data => console.log('Serveur:', data))
-    .catch(err => console.error('Erreur serveur:', err));
-}
