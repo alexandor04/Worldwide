@@ -250,6 +250,14 @@ document.addEventListener('DOMContentLoaded', () => {
         displayCharacters();
         characterForm.reset();
         characterFormContainer.classList.add('hidden');
+
+        const user = firebase.auth().currentUser;
+        if (user) {
+            const path = `personnages/${user.uid}/${currentBookId}/${newCharacter.id}`;
+            firebase.database().ref(path).set(newCharacter)
+                .then(() => console.log("✅ Personnage enregistrée"))
+                .catch(error => console.error("❌ Erreur Firebase :", error));
+        }
     }
 
     function deleteCharacter(index) {
