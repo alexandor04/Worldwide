@@ -1,4 +1,4 @@
-// --- Configuration Firebase cg---
+// --- Configuration Firebase ---
 const firebaseConfig = {
     apiKey: "AIzaSyCA69QC7iN3PfhIHn06O0xpsDMytBVnPNc",
     authDomain: "citations-livres.firebaseapp.com",
@@ -19,37 +19,39 @@ auth.signInAnonymously()
     .catch(error => console.error("❌ Erreur Firebase Auth :", error));
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // --- Sélecteurs ---
+    // Sélecteurs
     const mainPage = document.getElementById('main-page');
     const quotePage = document.getElementById('quote-page');
+    const characterPage = document.getElementById('character-page');
     const books = document.querySelectorAll('.book');
     const backButton = document.getElementById('back-button');
     const quotePageTitle = document.getElementById('quote-page-title');
+    const characterPageTitle = document.getElementById('character-page-title');
     const quotesList = document.getElementById('quotes-list');
-    const showFormButton = document.getElementById('show-form-button');
-    const quoteFormContainer = document.querySelector('.quote-form-container');
-    const quoteForm = document.getElementById('quote-form');
-
-    const characterForm = document.getElementById('character-form');
     const charactersList = document.getElementById('characters-list');
+    const showFormButton = document.getElementById('show-form-button');
+    const showCharacterFormButton = document.getElementById('show-character-form-button');
+    const quoteFormContainer = document.querySelector('.quote-form-container');
+    const characterFormContainer = document.querySelector('.character-form-container');
+    const quoteForm = document.getElementById('quote-form');
+    const characterForm = document.getElementById('character-form');
 
     let currentBookId = null;
 
-    // --- Données locales ---
+    // Données locales
     const bookData = {
         canguilhem: { title: "La connaissance de la vie", quotes: [] },
         verne: { title: "Vingt mille lieues sous les mers", quotes: [] },
         haushofer: { title: "Le mur invisible", quotes: [] }
     };
 
-    let charactersData = {
-        canguilhem: [],
-        verne: [],
-        haushofer: []
+    const charactersData = {
+        canguilhem: { title: "La connaissance de la vie", characters: [] },
+        verne: { title: "Vingt mille lieues sous les mers", characters: [] },
+        haushofer: { title: "Le mur invisible", characters: [] }
     };
 
-    // --- Sauvegarde / Chargement ---
+    // Sauvegarde / Chargement
     function loadQuotesFromStorage() {
         const savedQuotes = JSON.parse(localStorage.getItem('bookQuotes'));
         if (savedQuotes) {
@@ -66,19 +68,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadCharactersFromStorage() {
         const savedChars = JSON.parse(localStorage.getItem('bookCharacters'));
         if (savedChars) {
-            charactersData = savedChars;
+            Object.keys(charactersData).forEach(bookId => {
+                charactersData[bookId].characters = savedChars[bookId]?.characters || [];
+            });
         }
-        // On s'assure que chaque livre a bien un tableau
-        if (!charactersData.canguilhem) charactersData.canguilhem = [];
-        if (!charactersData.verne) charactersData.verne = [];
-        if (!charactersData.haushofer) charactersData.haushofer = [];
     }
 
     function saveCharacters() {
         localStorage.setItem('bookCharacters', JSON.stringify(charactersData));
     }
 
-    // --- Affichage des citations ---
+    // Affichage citations
     function displayQuote(quoteObject, index) {
         const card = document.createElement('div');
         card.classList.add('quote-card');
@@ -122,14 +122,40 @@ document.addEventListener('DOMContentLoaded', () => {
         quotesList.appendChild(card);
     }
 
-    // --- Affichage page citations ---
+    // Affichage personnages
+    function displayCharacters() {
+        charactersList.innerHTML = '';
+        if (!charactersData[currentBookId]) {
+            charactersData[currentBookId] = { title: "", characters: [] };
+        }
+        charactersData[currentBookId].characters.forEach((char, index) => {
+            const card = document.createElement('div');
+            card.classList.add('character-card');
+            card.innerHTML = `
+                <strong>${char.name}</strong><br>
+                Rôle : ${char.role || '—'}<br>
+                Lien avec principal : ${char.linkMain || '—'}<br>
+                Lien avec autre : ${char.linkOther || '—'}<br>
+                <em>Citations :</em> ${char.quotes || '—'}<br>
+                <button onclick="deleteCharacter(${index})">Supprimer</button>
+            `;
+            charactersList.appendChild(card);
+        });
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete-button');
+        deleteBtn.innerHTML = '🗑️';
+        deleteBtn.onclick = () => deleteCharacter(index);
+    }
+
+    // Page citations + persos
     function showQuotePageFor(bookId) {
         currentBookId = bookId;
         const book = bookData[bookId];
 
         quotePageTitle.textContent = book.title;
-        quotesList.innerHTML = '';
 
+        // Citations
+        quotesList.innerHTML = '';
         if (book.quotes.length > 0) {
             book.quotes.sort((a, b) => {
                 if (a.pinned && !b.pinned) return -1;
@@ -138,20 +164,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 const pageB = parseInt(b.pageNumber) || 0;
                 return pageA - pageB;
             });
-
             book.quotes.forEach((quote, index) => displayQuote(quote, index));
         } else {
-            quotesList.innerHTML = '<p style="text-align: center; color: #6c757d;">Aucune citation pour le moment. Ajoutez-en une !</p>';
+            quotesList.innerHTML = '<p style="text-align: center; color: #6c757d;">Aucune citation pour le moment.</p>';
         }
 
-        displayCharacters(); // Affiche les persos du livre courant
+        // Personnages
+        displayCharacters();
+        characterPage.classList.remove('hidden');
 
         mainPage.classList.add('hidden');
         quotePage.classList.remove('hidden');
-        quoteFormContainer.classList.add('hidden');
     }
 
-    // --- Gestion citations ---
+    // Gestion citations
     function handleAddQuote(event) {
         event.preventDefault();
 
@@ -181,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function deleteQuote(index) {
+     function deleteQuote(index) {
         if (confirm("Supprimer cette citation ?")) {
             const quoteToDelete = bookData[currentBookId].quotes[index];
             bookData[currentBookId].quotes.splice(index, 1);
@@ -205,62 +231,36 @@ document.addEventListener('DOMContentLoaded', () => {
         showQuotePageFor(currentBookId);
     }
 
-    // --- Gestion personnages ---
-    function displayCharacters() {
-        charactersList.innerHTML = '';
-        if (!charactersData[currentBookId]) {
-            charactersData[currentBookId] = [];
-        }
-        charactersData[currentBookId].forEach((char, index) => {
-            const card = document.createElement('div');
-            card.classList.add('character-card');
-            card.innerHTML = `
-                <strong>${char.name}</strong><br>
-                Rôle : ${char.role || '—'}<br>
-                Lien avec principal : ${char.linkMain || '—'}<br>
-                Lien avec autre : ${char.linkOther || '—'}<br>
-                <em>Citations :</em> ${char.quotes || '—'}<br>
-                <button onclick="deleteCharacter(${index})">Supprimer</button>
-            `;
-            charactersList.appendChild(card);
-        });
-    }
+    // Gestion personnages
+    function handleAddCharacter(event) {
+        event.preventDefault();
 
-    window.deleteCharacter = function(index) {
-        charactersData[currentBookId].splice(index, 1);
+        const newCharacter = {
+            name: document.getElementById('char-name').value.trim(),
+            role: document.getElementById('char-role').value.trim(),
+            linkMain: document.getElementById('char-link-main').value.trim(),
+            linkOther: document.getElementById('char-link-other').value.trim(),
+            quotes: document.getElementById('char-quotes').value.trim()
+        };
+
+        if (!newCharacter.name) return;
+
+        charactersData[currentBookId].characters.push(newCharacter);
         saveCharacters();
         displayCharacters();
-    };
-
-    if (characterForm) {
-        characterForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const newCharacter = {
-                name: document.getElementById('char-name').value.trim(),
-                role: document.getElementById('char-role').value.trim(),
-                linkMain: document.getElementById('char-link-main').value.trim(),
-                linkOther: document.getElementById('char-link-other').value.trim(),
-                quotes: document.getElementById('char-quotes').value.trim()
-            };
-
-            if (!newCharacter.name) {
-                alert("Veuillez entrer au moins un nom de personnage");
-                return;
-            }
-
-            if (!charactersData[currentBookId]) {
-                charactersData[currentBookId] = [];
-            }
-
-            charactersData[currentBookId].push(newCharacter);
-            saveCharacters();
-            displayCharacters();
-            characterForm.reset();
-        });
+        characterForm.reset();
+        characterFormContainer.classList.add('hidden');
     }
 
-    // --- Événements livres ---
+    function deleteCharacter(index) {
+        if (confirm("Supprimer ce personnage ?")) {
+            charactersData[currentBookId].characters.splice(index, 1);
+            saveCharacters();
+            displayCharacters();
+        }
+    }
+
+    // Événements
     books.forEach(book => {
         book.addEventListener('click', () => {
             showQuotePageFor(book.id);
@@ -279,7 +279,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     quoteForm.addEventListener('submit', handleAddQuote);
 
-    // --- Initialisation ---
+    showCharacterFormButton.addEventListener('click', () => {
+        characterFormContainer.classList.toggle('hidden');
+    });
+
+    characterForm.addEventListener('submit', handleAddCharacter);
+
+    // Initialisation
     loadQuotesFromStorage();
     loadCharactersFromStorage();
 });
