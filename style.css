@@ -413,6 +413,13 @@ header p {
     border-radius: 12px;
     box-shadow: var(--shadow);
     margin-bottom: 1.5rem;
+
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    width: 500px;
+
+    z-index: 1000;
 }
 
 #character-form {
@@ -455,7 +462,6 @@ header p {
     font-size: 1.1rem;
     font-weight: 500;
     transition: background-color 0.3s;
-    z-index: 1001;
 }
 
 #character-form button[type="submit"]:hover {
