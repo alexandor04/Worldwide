@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylefr.css">
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -41,10 +41,10 @@
           <div id="quote-page" class="hidden" style="display: grid; grid-template-columns: 1fr 2fr; gap: 2rem;">
 
     <!-- Colonne gauche : Personnages -->
-    <div>
-        <h2 style="text-align:center; font-family: var(--title-font);">Personnages</h2>
+    <div id="character-page" class="hidden">
+        <h2 id="character-page-title" style="text-align:center; font-family: var(--title-font);">Personnages</h2>
 
-<div class="character-form-container">
+<div class="character-form-container hidden">
     <form id="character-form">
         <input type="text" id="char-name" placeholder="Nom & prénom" required>
         <input type="text" id="char-role" placeholder="Rôle">
@@ -58,13 +58,13 @@
 <div id="characters-list"></div>
     </div>
 
-    <!-- Colonne droite : Citations -->
+    
     <div>
         <button id="back-button">← Retour à la bibliothèque</button>
         <h2 id="quote-page-title"></h2>
         <button id="show-form-button">+</button>
         <button id="show-character-form-button">👤</button>
-
+        <!-- Colonne droite : Citations -->
         <div class="quote-form-container hidden">
             <form id="quote-form">
                 <textarea id="quote-text" placeholder="« La citation... »" required></textarea>
@@ -82,6 +82,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scriptfr.js"></script>
 </body>
 </html>
